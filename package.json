@@ -1,0 +1,17 @@
+{
+  "name": "betek-sistema-pedidos",
+  "version": "1.0.0",
+  "description": "Sistema de pedido para una tienda",
+  "main": "index.ts",
+  "scripts": {
+    "dev": "ts-node index.ts ",
+    "start": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^3.11.3"
+  }
+}
