@@ -1,5 +1,5 @@
 export class Producto {
-  id?: number | null;
+  id?: number | null; // Campo autoincrementable 
   nombre: string;
   descripcion: string;
   precio: number;
