@@ -1,4 +1,7 @@
 // en un nivel más avanzado usamos las variables de entorno
+/**
+ * Configuración de la conexión a la base de datos 
+ */
 export default {
   HOST: "localhost",
   PORT: 3306,

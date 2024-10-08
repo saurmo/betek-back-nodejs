@@ -1,3 +1,8 @@
+-- DDL : LENGUAJE DE DEFINICIÓN DE DATOS
+-- Es el código que permite crear las tablas en la base de datos
+-- Este código se ejecuta en un script en la base de datos (dbeaver - workbench)
+-- para crear las tablas
+
 -- tienda_virtual.Categorias definition
 
 CREATE TABLE `Categorias` (
