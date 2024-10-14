@@ -1,6 +1,6 @@
 import { QueryResult, ResultSetHeader } from "mysql2";
 import { Producto } from "../../domain/models/Producto";
-import { ProductoRepository } from "../repositories/producto-repository";
+import { ProductoRepository } from "../repositories/producto.repository";
 
 export class ProductoController {
   private repository: ProductoRepository;

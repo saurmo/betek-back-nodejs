@@ -1,18 +1,7 @@
-console.log("Sistema de pedidos");
-
-import { QueryResult, RowDataPacket } from "mysql2";
-
-// @ts-ignore
-import * as readline from "readline";
 import { ProductoController } from "../controllers/producto.controller";
-// @ts-ignore
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+import { leerDatos, rl } from "./input";
 
-// Es el reemplazo de leer en el pseint
-const leerDatos = (mensaje: string): Promise<string> =>
-  new Promise((resolve) => rl.question(mensaje, (respuesta: string) => resolve(respuesta)));
-
-const mainProductos = async () => {
+export const mainProductos = async () => {
   const menu = `
   1. Listar productos
   2. Agregar producto
@@ -58,7 +47,7 @@ const mainProductos = async () => {
         });
         break;
       case 4:
-        const _idEliminar = await leerDatos("Ingrese id del producto a consultar: ");
+        const _idEliminar = await leerDatos("Ingrese id del producto a eliminar: ");
         const idEliminar = +_idEliminar;
         productoCtrl.eliminar(idEliminar);
         break;
@@ -86,11 +75,4 @@ const mainProductos = async () => {
   rl.close();
   return;
 };
-mainProductos()
-  .then(() => {
-    console.log("Fin script productos");
-  })
-  .finally(() => {
-    rl.close();
-    process.exit(0);
-  });
+
