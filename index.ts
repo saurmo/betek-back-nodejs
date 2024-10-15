@@ -1,43 +1,14 @@
-console.log("Sistema de pedidos");
+import Express from 'express'
 
-import { mainProductos } from "./src/infrastructure/entry-points/productos.input";
-import { mainCategorias } from "./src/infrastructure/entry-points/categorias.input";
-import { leerDatos, rl } from "./src/infrastructure/entry-points/input";
-
-
-const main = async () => {
-  const menu = `
-  1. Productos
-  2. Categorías
-  0. Salir
-  `;
-  let _opcion = await leerDatos(menu);
-  let opcion = Number(_opcion);
-  while (opcion !== 0) {
-    switch (opcion) {
-      case 1:
-        await mainProductos();
-        break;
-      case 2:
-        await mainCategorias();
-        break;
-      default:
-        console.log("Opcion no reconocida");
-        break;
-    }
-    _opcion = await leerDatos(menu);
-    opcion = Number(_opcion);
-  }
-
-  rl.close();
-  return;
-};
-
-main()
-  .then(() => {
-    console.log("Fin script");
+const createServer = () => {
+  const app = Express()
+  const PORT = process.env.PORT || 3000
+  app.get('/',(req, res)=>{
+    res.send('Hola mundo')
   })
-  .finally(() => {
-    rl.close();
-    process.exit(0);
-  });
+  app.listen(PORT, ()=>{
+    console.log(`Server - API REST: http://localhost:${PORT}`);
+  })
+}
+
+createServer()
