@@ -5,6 +5,8 @@
   "main": "index.ts",
   "scripts": {
     "dev": "ts-node index.ts ",
+    "dev1": "nodemon --exec 'ts-node index.ts' ",
+    "dev-script": "ts-node index.ts ",
     "start": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,6 +18,7 @@
     "mysql2": "^3.11.3"
   },
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.7.4"
   }
 }
