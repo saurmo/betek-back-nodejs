@@ -1,43 +1,25 @@
-console.log("Sistema de pedidos");
+// ENCARGADO DE CREAR EL SERVIDOR
+// El servidor va a proveer el api-rest
 
-import { mainProductos } from "./src/infrastructure/entry-points/productos.input";
-import { mainCategorias } from "./src/infrastructure/entry-points/categorias.input";
-import { leerDatos, rl } from "./src/infrastructure/entry-points/input";
+import Express from "express";
 
+const createServer = () => {
+  const app = Express();
 
-const main = async () => {
-  const menu = `
-  1. Productos
-  2. Categorías
-  0. Salir
-  `;
-  let _opcion = await leerDatos(menu);
-  let opcion = Number(_opcion);
-  while (opcion !== 0) {
-    switch (opcion) {
-      case 1:
-        await mainProductos();
-        break;
-      case 2:
-        await mainCategorias();
-        break;
-      default:
-        console.log("Opcion no reconocida");
-        break;
-    }
-    _opcion = await leerDatos(menu);
-    opcion = Number(_opcion);
-  }
+  const PORT = process.env.PORT || 3000;
 
-  rl.close();
-  return;
+  // Generación del primero recurso:
+  // Endpoint o url: http://localhost:3000/hola-mundo
+  app.get("/hola-mundo", (req, res) => {
+    console.log("nueva solicitud del endpoint http://localhost:3000/hola-mundo");
+    res.send({
+      message: "Hola Mundo",
+    });
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Servidor Api-Rest ejecutando: http://localhost:${PORT}`);
+  });
 };
 
-main()
-  .then(() => {
-    console.log("Fin script");
-  })
-  .finally(() => {
-    rl.close();
-    process.exit(0);
-  });
+createServer();
