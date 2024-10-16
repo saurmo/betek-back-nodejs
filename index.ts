@@ -2,7 +2,8 @@
 // El servidor va a proveer el api-rest
 
 import Express from "express";
-
+import { routes } from "./src/infrastructure/modules/api-rest/routers/index.router";
+import middleware404 from "./src/infrastructure/modules/api-rest/middleware/middleware";
 const createServer = () => {
   const app = Express();
 
@@ -10,12 +11,17 @@ const createServer = () => {
 
   // Generación del primero recurso:
   // Endpoint o url: http://localhost:3000/hola-mundo
-  app.get("/hola-mundo", (req, res) => {
+  app.get("/api", (req, res) => {
     console.log("nueva solicitud del endpoint http://localhost:3000/hola-mundo");
     res.send({
-      message: "Hola Mundo",
+      message: "Bienvenido a la API ",
     });
   });
+
+  /// Importar la rutas
+  app.use('/api/v1', routes());
+
+  app.use(middleware404)
 
   app.listen(PORT, () => {
     console.log(`Servidor Api-Rest ejecutando: http://localhost:${PORT}`);

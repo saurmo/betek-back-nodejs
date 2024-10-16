@@ -1,8 +1,8 @@
 console.log("Sistema de pedidos");
 
-import { mainProductos } from "./src/infrastructure/modules/terminal/productos.input";
-import { mainCategorias } from "./src/infrastructure/modules/terminal/categorias.input";
-import { leerDatos, rl } from "./src/infrastructure/modules/terminal/input";
+import { mainProductos } from "./productos.input";
+import { mainCategorias } from "./categorias.input";
+import { leerDatos, rl } from "./input";
 
 
 const main = async () => {

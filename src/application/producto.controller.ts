@@ -1,6 +1,6 @@
 import { QueryResult, ResultSetHeader } from "mysql2";
-import { Producto } from "../../domain/models/Producto";
-import { ProductoRepository } from "../repositories/producto.repository";
+import { ProductoRepository } from "../infrastructure/repositories/producto.repository";
+import { Producto } from "../domain/models/Producto";
 
 export class ProductoController {
   private repository: ProductoRepository;
@@ -90,12 +90,10 @@ export class ProductoController {
   async obtener() {
     try {
       const resultado = await this.repository.obtenerProductos();
-      console.log("Productos obtenidos");
-      console.log(resultado);
       return resultado;
     } catch (error) {
-      console.log("Ha ocurrido un error al consultando los productos.");
-      return error;
+      // TODO: Logger del error
+      throw error;
     }
   }
 

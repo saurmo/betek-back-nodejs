@@ -17,7 +17,9 @@ export const mainProductos = async () => {
   while (opcion !== 0) {
     switch (opcion) {
       case 1:
-        await productoCtrl.obtener();
+        const result = await productoCtrl.obtener();
+        console.log(result);
+
         break;
       case 2:
         const nombre = await leerDatos("Ingrese nombre del producto: ");
@@ -75,4 +77,3 @@ export const mainProductos = async () => {
   rl.close();
   return;
 };
-
