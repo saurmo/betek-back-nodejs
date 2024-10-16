@@ -1,4 +1,4 @@
-import { CategoriaController } from "../controllers/categoria.controller";
+import { CategoriaController } from "../../../application/categoria.controller";
 import { leerDatos, rl } from "./input";
 
 export const mainCategorias = async () => {

@@ -1,4 +1,4 @@
-import { ProductoController } from "../controllers/producto.controller";
+import { ProductoController } from "../../../application/producto.controller";
 import { leerDatos, rl } from "./input";
 
 export const mainProductos = async () => {

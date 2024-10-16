@@ -1,6 +1,6 @@
 import {  ResultSetHeader } from "mysql2";
-import { Categoria } from "../../domain/models/Categoria";
-import { CategoriaRepository } from "../repositories/categoria.repository";
+import { Categoria } from "../domain/models/Categoria";
+import { CategoriaRepository } from "../infrastructure/repositories/categoria.repository";
 
 export class CategoriaController {
   private repository: CategoriaRepository;
