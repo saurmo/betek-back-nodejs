@@ -4,7 +4,7 @@
   "description": "Sistema de pedido para una tienda",
   "main": "index.ts",
   "scripts": {
-    "dev": "ts-node index.ts ",
+    "dev": "nodemon -e ts,json --exec 'ts-node index.ts'",
     "start": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

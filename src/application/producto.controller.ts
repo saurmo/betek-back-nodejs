@@ -30,14 +30,13 @@ export class ProductoController {
       });
       const resultado = await this.repository.agregarProducto(producto);
       if (resultado.affectedRows == 1) {
-        console.log(`Producto agregado con el id: ${resultado.insertId}`);
+        return { ok: true, id: resultado.insertId };
       } else {
-        console.log("El producto no se agrego");
+        return { ok: false, message: "No se agrego el producto" };
       }
-      return resultado;
     } catch (error: any) {
       console.log("Ha ocurrido un error al guardar el producto.", error?.message);
-      return error;
+      throw error;
     }
   }
 
@@ -58,14 +57,13 @@ export class ProductoController {
       });
       const resultado = await this.repository.modificarProductos(producto);
       if (resultado.affectedRows === 1) {
-        console.log("Producto actualizado");
+        return { ok: true, message: "Producto actualizado" };
       } else {
-        console.log("No se pudo actualizar el producto");
+        return { ok: false, message: "No se pudo actualizar el producto" };
       }
-      return resultado;
     } catch (error) {
       console.log("Ha ocurrido un error actualizando el producto.");
-      return error;
+      throw error;
     }
   }
 
@@ -83,7 +81,7 @@ export class ProductoController {
       return resultado;
     } catch (error) {
       console.log("Ha ocurrido un error actualizando la cantidad.");
-      return error;
+      throw error;
     }
   }
 
@@ -101,31 +99,39 @@ export class ProductoController {
     try {
       const resultado = await this.repository.obtenerProducto(id);
       if (resultado.length == 1) {
-        console.log("Productos obtenido");
-        console.log(resultado[0]);
+        return resultado[0];
       } else {
-        console.log("No se encontro el producto");
+        return null;
       }
-      return resultado;
     } catch (error) {
       console.log("Ha ocurrido un error al consultando el producto.");
-      return error;
+      throw error;
     }
   }
 
-  eliminar(id: number) {
-    this.repository
-      .eliminarProducto(id)
-      .then((resultado: ResultSetHeader) => {
-        if (resultado.affectedRows == 1) {
-          console.log(`Producto eliminado`);
-        } else {
-          console.log("No se pudo eliminar el producto");
-        }
-      })
-      .catch((error) => {
-        console.log("Ha ocurrido un error eliminando el producto.");
-        console.log(error);
-      });
+  async eliminar(id: number) {
+    const resultado: ResultSetHeader = await this.repository.eliminarProducto(id);
+    if (resultado.affectedRows == 1) {
+      return { ok: true, message: "Producto eliminado" };
+    } else {
+      return { ok: false, message: "No se pudo eliminar el producto" };
+    }
   }
+
+  // eliminar2(id: number) {
+  //   return new Promise((resolve, reject) => {
+  //     this.repository
+  //       .eliminarProducto(id)
+  //       .then((resultado) => {
+  //         if (resultado.affectedRows == 1) {
+  //           resolve({ ok: true, message: "Producto eliminado" });
+  //         } else {
+  //           resolve({ ok: false, message: "No se pudo eliminar el producto" });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         reject({ ok: false, message: "Error al eliminar el producto" });
+  //       });
+  //   });
+  // }
 }
