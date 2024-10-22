@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "class-validator": "^0.14.1",
+    "config": "^3.3.12",
     "express": "^4.21.1",
+    "joi": "^17.13.3",
     "mysql2": "^3.11.3"
   },
   "devDependencies": {

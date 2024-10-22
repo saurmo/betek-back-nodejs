@@ -34,10 +34,10 @@ export class ProductoRepository {
   /**
    * Este método es con los tipos de datos implícitos
    */
-  async obtenerProductos() {
+  async obtenerProductos(): Promise<RowDataPacket[]> {
     const connection = getPoolConnection();
     const querySql = `SELECT * FROM Productos`;
-    const result = await connection.query(querySql);
+    const result = await connection.query<RowDataPacket[]>(querySql);
     return result[0];
   }
 

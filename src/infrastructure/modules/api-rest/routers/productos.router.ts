@@ -18,7 +18,8 @@ export const productsRoutes = () => {
     productosCtrl
       .agregar(payload)
       .then((result) => {
-        res.send(result);
+        const status = result.ok === true ? 200 : 400;
+        res.status(status).send(result);
       })
       .catch((error) => {
         res.status(500).send(error);
@@ -30,6 +31,20 @@ export const productsRoutes = () => {
     const payload = req.body;
     productosCtrl
       .actualizar(payload)
+      .then((result) => {
+        const status = result.ok === true ? 200 : 400;
+        res.status(status).send(result);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  });
+
+  router.put("/productos/cantidad", (req, res) => {
+    // Actualizar la cantidad un producto
+    const body = req.body;
+    productosCtrl
+      .actualizarCantidad(body)
       .then((result) => {
         const status = result.ok === true ? 200 : 400;
         res.status(status).send(result);
@@ -59,9 +74,7 @@ export const productsRoutes = () => {
       const result = await productosCtrl.obtener();
       res.send(result);
     } catch (error) {
-      res.send({
-        message: "Ha ocurrido un error al consultar los productos",
-      });
+      res.status(500).send(error);
     }
   });
 
@@ -70,16 +83,9 @@ export const productsRoutes = () => {
     try {
       const idStr = req.params.id;
       const id = parseInt(idStr);
-      if (Number.isNaN(id)) {
-        res.status(400).send({ ok: false, message: "Error en el id enviado" });
-        return;
-      }
       const result = await productosCtrl.obtenerPorId(id);
-      if (result !== null) {
-        res.send({ ok: true, info: result });
-      } else {
-        res.status(404).send({ ok: false, message: "No se encontro el producto" });
-      }
+      const status = result.ok === true ? 200 : 404;
+      res.status(status).send(result);
     } catch (error) {
       res.status(500).send(error);
     }
@@ -89,10 +95,6 @@ export const productsRoutes = () => {
     try {
       const idStr = req.params.id;
       const id = parseInt(idStr);
-      if (Number.isNaN(id)) {
-        res.status(400).send({ ok: false, message: "Error en el id enviado" });
-        return;
-      }
       const result = await productosCtrl.eliminar(id);
       const status = result.ok === true ? 200 : 400;
       res.status(status).send(result);
