@@ -29,4 +29,7 @@ const createServer = () => {
   });
 };
 
+console.log(process.env);
+
+
 createServer();

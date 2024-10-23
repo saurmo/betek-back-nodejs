@@ -19,6 +19,7 @@
     "mysql2": "^3.11.3"
   },
   "devDependencies": {
+    "@types/config": "^3.3.5",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.4"
   }

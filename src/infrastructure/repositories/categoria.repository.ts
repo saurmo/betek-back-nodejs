@@ -4,6 +4,8 @@ import { getPoolConnection } from "./data-source";
 import { Categoria } from "../../domain/models/Categoria";
 
 export class CategoriaRepository {
+
+
   async agregar(categoria: Categoria): Promise<ResultSetHeader> {
     const connection: Pool = getPoolConnection();
     const querySql: string = `INSERT INTO Categorias (id, nombre, descripcion) VALUES (?,?,?)`;
@@ -12,10 +14,10 @@ export class CategoriaRepository {
     return result[0];
   }
 
-  async obtener() {
+  async obtener() : Promise<RowDataPacket[]>{
     const connection = getPoolConnection();
     const querySql = `SELECT * FROM Categorias`;
-    const result = await connection.query(querySql);
+    const result = await connection.query<RowDataPacket[]>(querySql);
     return result[0];
   }
 

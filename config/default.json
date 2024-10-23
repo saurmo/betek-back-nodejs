@@ -1,0 +1,8 @@
+
+{
+  "HOST": "localhost",
+  "DB_PORT": 3306,
+  "USER": "---",
+  "PASSWORD": "---", 
+  "DATABASE": "local"
+}

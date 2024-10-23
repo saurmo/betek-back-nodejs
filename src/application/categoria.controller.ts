@@ -1,6 +1,7 @@
-import {  ResultSetHeader } from "mysql2";
+import { ResultSetHeader } from "mysql2";
 import { Categoria } from "../domain/models/Categoria";
 import { CategoriaRepository } from "../infrastructure/repositories/categoria.repository";
+import { CategoriaDto } from "../infrastructure/dto/Categoria.dto";
 
 export class CategoriaController {
   private repository: CategoriaRepository;
@@ -9,96 +10,88 @@ export class CategoriaController {
     this.repository = new CategoriaRepository();
   }
 
-  async agregar(payload: {
-    nombre: string;
-    descripcion: string;
-    id: string;
-  }) {
+  async agregar(body: { nombre: string; descripcion: string; id: string }) {
     try {
-      const categoria = new Categoria({
-        id: payload.id,
-        nombre: payload.nombre,
-        descripcion: payload.descripcion,
-      });
+      const dto = new CategoriaDto(body);
+      const errores = await dto.validateDto();
+      if (errores.length > 0) {
+        return { ok: false, message: "El request tiene errores", error: errores };
+      }
+
+      const categoria = new Categoria(body);
       const resultado = await this.repository.agregar(categoria);
       if (resultado.affectedRows == 1) {
-        console.log(`Categoría agregada con el id: ${resultado.insertId}`);
+        return { ok: true, id: resultado.insertId };
       } else {
-        console.log("La categoría no se agrego");
+        return { ok: false, message: "La categoría no se agrego" };
       }
-      return resultado;
     } catch (error: any) {
-      console.log("Ha ocurrido un error al guardar.", error?.message);
-      return error;
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
     }
   }
 
-  async actualizar(payload: {
-    id: string;
-    nombre: string;
-    descripcion: string;
-  }) {
+  async actualizar(body: { id: string; nombre: string; descripcion: string }) {
     try {
-      const categoria = new Categoria({
-        id: payload.id,
-        nombre: payload.nombre,
-        descripcion: payload.descripcion,
-      });
+      const dto = new CategoriaDto(body);
+      const errores = await dto.validateDto();
+      if (errores.length > 0) {
+        return { ok: false, message: "El request tiene errores", error: errores };
+      }
+      const categoria = new Categoria(body);
       const resultado = await this.repository.modificar(categoria);
       if (resultado.affectedRows === 1) {
-        console.log("Categoría actualizada");
+        return { ok: true, message: "Categoría actualizada" };
       } else {
-        console.log("No se pudo actualizar la categoría");
+        return { ok: false, message: "No se pudo actualizar la categoría" };
       }
-      return resultado;
     } catch (error) {
-      console.log("Ha ocurrido un error actualizando");
-      return error;
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
     }
   }
-
 
   async obtener() {
     try {
       const resultado = await this.repository.obtener();
-      console.log("Categorías");
-      console.log(resultado);
-      return resultado;
+      if (resultado.length == 0) {
+        return { ok: true, message: "No hay categorías" };
+      } else {
+        return { ok: true, info: resultado };
+      }
     } catch (error) {
-      console.log("Ha ocurrido un error al consultando.");
-      return error;
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
     }
   }
 
   async obtenerPorId(id: string) {
     try {
+      if (!id) {
+        return { ok: false, message: "Id es obligtorio ." };
+      }
       const resultado = await this.repository.obtenerUno(id);
       if (resultado.length == 1) {
-        console.log("Categoría consultada");
-        console.log(resultado[0]);
+        return { ok: true, info: resultado[0] };
       } else {
-        console.log("No se encontro la categoría");
+        return { ok: false, message: "No se encontro la categoría" };
       }
-      return resultado;
     } catch (error) {
-      console.log("Ha ocurrido un error al consultando.");
-      return error;
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
     }
   }
 
-  eliminar(id: string) {
-    this.repository
-      .eliminar(id)
-      .then((resultado: ResultSetHeader) => {
-        if (resultado.affectedRows == 1) {
-          console.log(`Categoría eliminada`);
-        } else {
-          console.log("No se pudo eliminar la categoría");
-        }
-      })
-      .catch((error) => {
-        console.log("Ha ocurrido un error eliminando.");
-        console.log(error);
-      });
+  async eliminar(id: string) {
+    try {
+      if (!id) {
+        return { ok: false, message: "Id es obligtorio ." };
+      }
+
+      const resultado = await this.repository.eliminar(id);
+      if (resultado.affectedRows == 1) {
+        return { ok: true, message: "Categoría eliminada" };
+      } else {
+        return { ok: false, message: "No se pudo eliminar la categoría" };
+      }
+    } catch (error) {
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
+    }
   }
 }
