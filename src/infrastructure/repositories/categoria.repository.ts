@@ -1,6 +1,5 @@
 import { FieldPacket, Pool, ResultSetHeader, RowDataPacket } from "mysql2/promise";
-import { Producto } from "../../domain/models/Producto";
-import { getPoolConnection } from "./data-source";
+import { getPoolConnection } from "./config/data-source";
 import { Categoria } from "../../domain/models/Categoria";
 
 export class CategoriaRepository {
