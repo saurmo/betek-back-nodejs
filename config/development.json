@@ -1,6 +1,6 @@
 {
   "HOST": "localhost",
   "USER": "root",
-  "PASSWORD": "....", 
-  "DATABASE": "tienda_virtual_local"
+  "PASSWORD": "saurmo12", 
+  "DATABASE": "tienda_virtual"
 }

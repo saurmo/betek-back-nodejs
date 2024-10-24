@@ -22,5 +22,3 @@ export const getPoolConnection = () => {
   return connection;
 };
 
-console.log(configOptions);
-

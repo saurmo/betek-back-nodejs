@@ -1,4 +1,6 @@
 {
-  "USER": "DB_USER_NAME",
+  "HOST": "DB_HOST",
+  "DB_PORT": "DB_PORT",
+  "USER": "DB_USER",
   "PASSWORD": "DB_PASSWORD"
 }

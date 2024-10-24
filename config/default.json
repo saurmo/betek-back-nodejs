@@ -1,8 +1,8 @@
 
 {
-  "HOST": "localhost",
+  "HOST": "",
   "DB_PORT": 3306,
-  "USER": "---",
-  "PASSWORD": "---", 
-  "DATABASE": "local"
+  "USER": "",
+  "PASSWORD": "", 
+  "DATABASE": ""
 }
