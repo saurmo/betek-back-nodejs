@@ -13,4 +13,19 @@ export class ClienteRepository {
   agregar(cliente: ClienteEntity) {
     return this.repository.save(cliente);
   }
+
+  actualizar(cliente: ClienteEntity) {
+    return this.repository.update({ dni: cliente.dni }, cliente);
+  }
+
+  obtener() {
+    // SELECT dni, correo, nombre WHERE Clientes
+    return this.repository.find({
+      select: {
+        dni: true,
+        correo: true,
+        nombre: true
+      }
+    })
+  }
 }

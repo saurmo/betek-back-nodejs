@@ -11,7 +11,6 @@ export const clientesRoutes = () => {
 
   router.post("/clientes", (req, res) => {
     const payload = req.body;
-    // Resolver la promesa con then-catch del controlador
     ctrl
       .agregar(payload)
       .then((result) => {
@@ -22,5 +21,31 @@ export const clientesRoutes = () => {
         res.status(500).send(error);
       });
   });
+
+  router.put("/clientes", (req, res) => {
+    const payload = req.body;
+    ctrl
+      .actualizar(payload)
+      .then((result) => {
+        const status = result.ok === true ? 200 : 400;
+        res.status(status).send(result);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  });
+
+  router.get("/clientes", (req, res) => {
+    ctrl
+      .obtener()
+      .then((result) => {
+        const status = result.ok === true ? 200 : 400;
+        res.status(status).send(result);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  });
+
   return router;
 };

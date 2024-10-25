@@ -1,5 +1,9 @@
 # NOTAS
 
+## link
+https://beteksolutions-my.sharepoint.com/:v:/g/personal/back_betek_la/EaaUyeLwmF1Dv-xt-pmxS_AB2hS5h3nQo_m6405RibusJg?e=VkbbYg
+
+
 PowerShell
 ```$env:NODE_ENV="development" ```
 
