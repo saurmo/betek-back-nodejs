@@ -49,7 +49,7 @@ export class ClienteController {
     }
   }
 
-  
+
   async obtener() {
     try {
       const resultado = await this.repository.obtener()
@@ -57,6 +57,19 @@ export class ClienteController {
         return { ok: true, message: "No hay cliente" };
       } else {
         return { ok: true, info: resultado };
+      }
+    } catch (error) {
+      throw { ok: false, message: "Ha ocurrido un error inesperado", error };
+    }
+  }
+
+  async obtenerPorId(id: string) {
+    try {
+      const resultado = await this.repository.obtenerPorId(id)
+      if (resultado !== null) {
+        return { ok: true, info: resultado };
+      } else {
+        return { ok: false, message: "No hay cliente" };
       }
     } catch (error) {
       throw { ok: false, message: "Ha ocurrido un error inesperado", error };

@@ -28,4 +28,18 @@ export class ClienteRepository {
       }
     })
   }
+
+  obtenerPorId(id: string) {
+    // SELECT dni, correo, nombre WHERE Clientes
+    return this.repository.findOne({
+      select: {
+        dni: true,
+        correo: true,
+        nombre: true
+      },
+      where: {
+        dni: id
+      }
+    })
+  }
 }

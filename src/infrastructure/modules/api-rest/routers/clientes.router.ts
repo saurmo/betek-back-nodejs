@@ -47,5 +47,18 @@ export const clientesRoutes = () => {
       });
   });
 
+  router.get("/clientes/:id", (req, res) => {
+    const id = req.params.id
+    ctrl
+      .obtenerPorId(id)
+      .then((result) => {
+        const status = result.ok === true ? 200 : 404;
+        res.status(status).send(result);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  });
+
   return router;
 };
