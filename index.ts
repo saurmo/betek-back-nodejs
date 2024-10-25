@@ -3,14 +3,13 @@
 
 import Express from "express";
 import { routes } from "./src/infrastructure/modules/api-rest/routers/index.router";
-import middleware404 from "./src/infrastructure/modules/api-rest/middleware/middleware";
+import middleware404 from "./src/infrastructure/modules/api-rest/middleware/middleware-404";
 import { AppDataSource } from "./src/infrastructure/repositories/config/data-source-orm";
 
 const createServer = async () => {
   try {
-    console.log('Entorno:', process.env.NODE_ENV);
-    
-    await AppDataSource.initialize();
+
+    await AppDataSource.initialize(); // Se iniciar el
 
     console.log('Datasource inicializado');
     
@@ -38,7 +37,6 @@ const createServer = async () => {
     });
   } catch (error) {
     console.error(error);
-    
     console.error(`Error al iniciar el servidor web: ${error}`);
   }
 };

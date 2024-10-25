@@ -1,5 +1,12 @@
 # NOTAS
 
+
+
+## HOST DB RENDER.COM
+Solo permite postgres, entonces debemos de instalar postgres:
+--host--.oregon-postgres.render.com
+
+
 Tarea en clase:
 
 Crear el endpoint para consultar un usuario por dni de la base de datos.
