@@ -30,7 +30,7 @@ export class ClienteRepository {
   }
 
   obtenerPorId(id: string) {
-    // SELECT dni, correo, nombre WHERE Clientes
+    // SELECT dni, correo, nombre FROM CLIENTES WHERE dni=id
     return this.repository.findOne({
       select: {
         dni: true,
@@ -39,6 +39,15 @@ export class ClienteRepository {
       },
       where: {
         dni: id
+      }
+    })
+  }
+
+  obtenerPorCorreo(correo: string) {
+    // SELECT * FROM Clientes WHERE correo=?
+    return this.repository.findOne({
+      where: {
+        correo
       }
     })
   }

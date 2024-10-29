@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, Index, PrimaryColumn } from "typeorm";
 
 
 @Entity("Clientes")
@@ -14,6 +14,7 @@ export class ClienteEntity {
   clave: string;
 
   @Column()
+  @Index()
   correo: string;
 
   constructor(cliente: { dni: string; nombre: string; clave: string; correo: string }) {

@@ -3,6 +3,7 @@ import { productsRoutes } from "./productos.router";
 import { categoriasRoutes } from "./categorias.router";
 import { clientesRoutes } from "./clientes.router";
 import middlewareAuth from "../middleware/middleware-auth";
+import { authRoutes } from "./auth.router";
 // Archivo principal que contiene todas las otras rutas
 export const routes = () => {
   const router = Express.Router();
@@ -13,6 +14,7 @@ export const routes = () => {
     res.send({ message: "Bienvenido a la API " });
   });
 
+  router.use(authRoutes());
   router.use(productsRoutes());
   router.use(categoriasRoutes());
   router.use(middlewareAuth,clientesRoutes());
