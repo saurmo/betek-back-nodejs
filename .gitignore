@@ -4,3 +4,5 @@ node_modules
 dist
 
 local.json
+local-v1.json
+notas.txt
