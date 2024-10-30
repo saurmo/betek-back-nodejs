@@ -4,5 +4,6 @@
   "DB_PORT": 3306,
   "USER": "",
   "PASSWORD": "", 
-  "DATABASE": ""
+  "DATABASE": "",
+  "JWT_SECRET":""
 }

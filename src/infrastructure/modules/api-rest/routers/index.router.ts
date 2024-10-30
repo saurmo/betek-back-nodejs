@@ -15,7 +15,7 @@ export const routes = () => {
   });
 
   router.use(authRoutes());
-  router.use(productsRoutes());
+  router.use(middlewareAuth, productsRoutes());
   router.use(categoriasRoutes());
   router.use(middlewareAuth,clientesRoutes());
   // TODO: OTRAS RUTAS
