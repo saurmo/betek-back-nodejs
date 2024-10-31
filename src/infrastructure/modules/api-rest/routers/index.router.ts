@@ -4,6 +4,7 @@ import { categoriasRoutes } from "./categorias.router";
 import { clientesRoutes } from "./clientes.router";
 import middlewareAuth from "../middleware/middleware-auth";
 import { authRoutes } from "./auth.router";
+import { reportesRouter } from "./reportes.router";
 // Archivo principal que contiene todas las otras rutas
 export const routes = () => {
   const router = Express.Router();
@@ -12,14 +13,15 @@ export const routes = () => {
   // Endpoint o url: http://localhost:3000/hola-mundo
   router.get("/", (req, res) => {
     res.send({ message: "Bienvenido a la API " });
-  });
+  }); 
+
+  router.use(reportesRouter)
 
   router.use(authRoutes());
   router.use(middlewareAuth, productsRoutes());
   router.use(categoriasRoutes());
   router.use(middlewareAuth,clientesRoutes());
-  // TODO: OTRAS RUTAS
-  //  router.use(());
+
 
   return router;
 };
