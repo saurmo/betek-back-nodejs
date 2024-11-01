@@ -1,9 +1,11 @@
-
 {
   "HOST": "",
   "DB_PORT": 3306,
   "USER": "",
-  "PASSWORD": "", 
+  "PASSWORD": "",
   "DATABASE": "",
-  "JWT_SECRET":""
+  "JWT_SECRET": "",
+  "REPORT_SERVICE": {
+    "URL": "http://localhost:3001/api/v1/reportes/productos"
+  }
 }

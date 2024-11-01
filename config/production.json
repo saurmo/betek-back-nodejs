@@ -1,6 +1,8 @@
 {
   
-  
+  "REPORT_SERVICE": {
+    "URL": "http://---URL DE PRODUCCION---:3001/api/v1/reportes/productos"
+  }
   
   
   

@@ -8,8 +8,18 @@ const reportesRouter = express.Router()
 
 reportesRouter.get('/reportes/productos', async (req: Request, res: Response) => {
     try {
+
+        const queryParams = req.query
+        let filter: { limit: number, search?: string } = {
+            limit: 10,
+            search: queryParams.search?.toString()
+        }
+        if (queryParams.limit) {
+            filter.limit = parseInt(queryParams.limit.toString())
+        }
+
         const reportes = new Reportes()
-        const reporteProductos = await reportes.consultarReporteProductos()
+        const reporteProductos = await reportes.consultarReporteProductos(filter)
         res.status(200).send({
             ok: true,
             info: reporteProductos
