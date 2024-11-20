@@ -13,14 +13,14 @@ export const routes = () => {
   // Endpoint o url: http://localhost:3000/hola-mundo
   router.get("/", (req, res) => {
     res.send({ message: "Bienvenido a la API " });
-  }); 
+  });
 
   router.use(reportesRouter)
 
   router.use(authRoutes());
-  router.use(middlewareAuth, productsRoutes());
+  router.use(productsRoutes());
   router.use(categoriasRoutes());
-  router.use(middlewareAuth,clientesRoutes());
+  router.use(middlewareAuth, clientesRoutes());
 
 
   return router;

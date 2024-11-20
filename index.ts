@@ -5,19 +5,24 @@ import Express from "express";
 import { routes } from "./src/infrastructure/modules/api-rest/routers/index.router";
 import middleware404 from "./src/infrastructure/modules/api-rest/middleware/middleware-404";
 import { AppDataSource } from "./src/infrastructure/repositories/config/data-source-orm";
+import fileUpload from "express-fileupload";
 
 const createServer = async () => {
   try {
 
-    await AppDataSource.initialize(); // Se iniciar el
-
+    await AppDataSource.initialize();
     console.log('Datasource inicializado');
-    
+
 
     const app = Express(); // Se crea la instancia del servidor
 
     // Middleware: Para parsear el json de las solicitudes
     app.use(Express.json());
+
+    // Middleware: Para recibir archivos
+    app.use(fileUpload({
+      limits: { fieldSize: 50 * 1024 * 1024 }
+    }))
 
     // Generación del primero recurso:
     // Endpoint o url: http://localhost:3000/hola-mundo
